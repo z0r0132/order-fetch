@@ -8,7 +8,10 @@ function callApis() {
   callApi();
   callApi();
 }
+
+var lastResponseId = 0;
 var lastCallId = 0;
+
 function callApi() {
   lastCallId = lastCallId + 1;
   var callId = lastCallId;
@@ -22,8 +25,9 @@ function callApi() {
       console.error(err);
     })
     .done(function (data) {
-      if (callId >= lastCallId) {
-        console.log("worked callId and global", callId, lastCallId);
-      } else console.log("ignored callId and global", callId, lastCallId);
+      if (callId >= lastResponseId) {
+        lastResponseId = callId;
+        console.log("worked callId and lastResponseId", callId, lastResponseId);
+      } else console.log("ignored callId and lastResponseId", callId, lastResponseId);
     });
 }
