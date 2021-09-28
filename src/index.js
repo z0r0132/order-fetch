@@ -1,9 +1,13 @@
 $(function () {
-  callApi();
-  callApi();
-  callApi();
-  callApi();
+  callApis();
+  setTimeout(callApis, 300);
 });
+function callApis() {
+  callApi();
+  callApi();
+  callApi();
+  callApi();
+}
 var lastCallId = 0;
 function callApi() {
   lastCallId = lastCallId + 1;
@@ -19,7 +23,6 @@ function callApi() {
     })
     .done(function (data) {
       if (callId >= lastCallId) {
-        lastCallId = callId;
         console.log("worked callId and global", callId, lastCallId);
       } else console.log("ignored callId and global", callId, lastCallId);
     });
